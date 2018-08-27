@@ -9,13 +9,27 @@ import AddCategory from './AddCategory'
 class CategoryList extends Component {
   static propTypes = {
     uid: PropTypes.string,
-    categories: PropTypes.arrayOf(PropTypes.string)
+    categories: PropTypes.arrayOf(PropTypes.string),
+    selectedCategory: PropTypes.string,
+    selectCategory: PropTypes.func.isRequired,
   }
 
   renderCategory(category) {
-    return <div key={category}>
-      {category}
-    </div>
+    const styles = {
+      padding: '1rem',
+      cursor: 'pointer'
+    }
+    if (category === this.props.selectedCategory) {
+      styles.backgroundColor = '#988afe'
+    }
+    return (
+      <div
+        key={category}
+        style={styles}
+        onClick={() => this.props.selectCategory(category)}>
+        {category}
+      </div >
+    )
   }
 
   render() {
@@ -37,10 +51,15 @@ const mapStateToProps = state => {
   return {
     uid: state.firebase.auth.uid,
     categories: state.firestore.ordered.categories ? state.firestore.ordered.categories.map(c => c.name) : [],
+    selectedCategory: state.categories.selectedCategory
   }
 }
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = dispatch => {
+  return {
+    selectCategory: category => dispatch({ type: 'selectCategory', category })
+  }
+}
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
