@@ -3,7 +3,7 @@ import { Provider } from "react-redux"
 
 import store from "./redux/store"
 import AuthButton from "./components/AuthButton"
-import AddCategory from "./components/AddCategory"
+import CategoryList from "./components/CategoryList"
 
 
 class App extends Component {
@@ -12,7 +12,7 @@ class App extends Component {
       <Provider store={store}>
         <div>
           <AuthButton />
-          <AddCategory />
+          <CategoryList />
         </div>
       </Provider>
     )
