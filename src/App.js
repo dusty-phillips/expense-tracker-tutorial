@@ -4,7 +4,7 @@ import { Provider } from "react-redux"
 import store from "./redux/store"
 import AuthButton from "./components/AuthButton"
 import CategoryList from "./components/CategoryList"
-
+import AddExpense from "./components/AddExpense"
 
 class App extends Component {
   render() {
@@ -13,6 +13,7 @@ class App extends Component {
         <div>
           <AuthButton />
           <CategoryList />
+          <AddExpense />
         </div>
       </Provider>
     )
