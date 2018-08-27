@@ -29,11 +29,17 @@ class AuthButton extends Component {
         </div>
       )
     }
-    return <button
-      style={{ width: "20rem" }}
-      onClick={() => this.props.firebase.logout()}
-    > Logout</button >
-
+    return (
+      <button
+        style={{ width: "20rem" }}
+        onClick={async () => {
+          await this.props.firebase.logout()
+          this.props.clearFirestore()
+        }}
+      >
+        Logout
+      </button >
+    )
   }
 }
 
@@ -41,7 +47,11 @@ const mapStateToProps = state => {
   return { auth: state.firebase.auth }
 }
 
-const mapDispatchToProps = {
+const mapDispatchToProps = dispatch => {
+  return {
+    clearFirestore: () => dispatch({ type: '@@reduxFirestore/CLEAR_DATA' })
+
+  }
 }
 
 
